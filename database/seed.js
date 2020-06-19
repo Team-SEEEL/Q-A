@@ -42,7 +42,7 @@ for (var i = 0; i < 100; i++) {
   }
   var randomQuestion = faker.hacker.phrase();
   function Question(body) {
-    this.body = randomQuestion;
+    this.body = randomQuestion + '?';
     this.answers = answered;
   }
 
