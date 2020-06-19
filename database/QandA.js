@@ -4,6 +4,9 @@ mongoose.Promise = global.Promise;
 
 const questionsSchema = new mongoose.Schema({
   body: String,
+  answers: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Answers' }
+  ]
 })
 
 const answersSchema = new mongoose.Schema({
@@ -11,9 +14,6 @@ const answersSchema = new mongoose.Schema({
   votes: Number,
   seller: Boolean,
   name: String,
-  question: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'Questions' }
-  ]
 })
 
 const Questions = mongoose.model('Questions', questionsSchema);
