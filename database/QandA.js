@@ -3,14 +3,17 @@ const db = require('./index.js');
 mongoose.Promise = global.Promise;
 
 const questionsSchema = new mongoose.Schema({
-  body: String
+  body: String,
 })
 
 const answersSchema = new mongoose.Schema({
   answer: String,
   votes: Number,
   seller: Boolean,
-  name: String
+  name: String,
+  question: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Questions' }
+  ]
 })
 
 const Questions = mongoose.model('Questions', questionsSchema);
@@ -22,6 +25,10 @@ const findQuestions = (query, callback) => {
 
 const findAnswers = (query, callback) => {
   Answers.find(query, callback);
+}
+
+const findAndVote = () => {
+  Answers.findOneandUpdate
 }
 
 module.exports = {
