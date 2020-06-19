@@ -16,7 +16,17 @@ const answersSchema = new mongoose.Schema({
 const Questions = mongoose.model('Questions', questionsSchema);
 const Answers = mongoose.model('Answers', answersSchema);
 
+const findQuestions = (query, callback) => {
+  Questions.find(query, callback);
+}
+
+const findAnswers = (query, callback) => {
+  Answers.find(query, callback);
+}
+
 module.exports = {
   Questions: Questions,
-  Answers: Answers
+  Answers: Answers,
+  findQuestions: findQuestions,
+  findAnswers: findAnswers
 }

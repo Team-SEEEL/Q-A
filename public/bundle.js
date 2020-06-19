@@ -33,35 +33,18 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
 /******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -79,22 +62,20 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
-/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./client/src/index.jsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./client/src/index.jsx":
+/******/ ([
+/* 0 */
+/* no static exports found */
+/* all exports used */
 /*!******************************!*\
   !*** ./client/src/index.jsx ***!
   \******************************/
-/*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: Cannot find module '@babel/preset-es2015, @babel/preset-env' from '/Users/brokeboi/Q-A'\\n    at Function.resolveSync [as sync] (/Users/brokeboi/Q-A/node_modules/resolve/lib/sync.js:89:15)\\n    at resolveStandardizedName (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/files/plugins.js:101:31)\\n    at resolvePreset (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/files/plugins.js:58:10)\\n    at loadPreset (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/files/plugins.js:77:20)\\n    at createDescriptor (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:154:9)\\n    at /Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:109:50\\n    at Array.map (<anonymous>)\\n    at createDescriptors (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:109:29)\\n    at createPresetDescriptors (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:101:10)\\n    at /Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:58:104\\n    at cachedFunction (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/caching.js:62:27)\\n    at cachedFunction.next (<anonymous>)\\n    at evaluateSync (/Users/brokeboi/Q-A/node_modules/gensync/index.js:244:28)\\n    at sync (/Users/brokeboi/Q-A/node_modules/gensync/index.js:84:14)\\n    at presets (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-descriptors.js:29:84)\\n    at mergeChainOpts (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-chain.js:320:26)\\n    at /Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-chain.js:283:7\\n    at Generator.next (<anonymous>)\\n    at buildRootChain (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/config-chain.js:68:36)\\n    at buildRootChain.next (<anonymous>)\\n    at loadPrivatePartialConfig (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/partial.js:95:62)\\n    at loadPrivatePartialConfig.next (<anonymous>)\\n    at Function.<anonymous> (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/partial.js:120:25)\\n    at Generator.next (<anonymous>)\\n    at evaluateSync (/Users/brokeboi/Q-A/node_modules/gensync/index.js:244:28)\\n    at Function.sync (/Users/brokeboi/Q-A/node_modules/gensync/index.js:84:14)\\n    at Object.<anonymous> (/Users/brokeboi/Q-A/node_modules/@babel/core/lib/config/index.js:43:61)\\n    at Object.<anonymous> (/Users/brokeboi/Q-A/node_modules/babel-loader/lib/index.js:151:26)\\n    at Generator.next (<anonymous>)\\n    at asyncGeneratorStep (/Users/brokeboi/Q-A/node_modules/babel-loader/lib/index.js:3:103)\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9jbGllbnQvc3JjL2luZGV4LmpzeC5qcyIsInNvdXJjZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./client/src/index.jsx\n");
+eval("throw new Error(\"Module build failed: Error: Couldn't find preset \\\"@babel/preset-react\\\" relative to directory \\\"/Users/brokeboi/Q-A/client/src\\\"\\n    at /Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/options/option-manager.js:293:19\\n    at Array.map (<anonymous>)\\n    at OptionManager.resolvePresets (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/options/option-manager.js:275:20)\\n    at OptionManager.mergePresets (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/options/option-manager.js:264:10)\\n    at OptionManager.mergeOptions (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/options/option-manager.js:249:14)\\n    at OptionManager.init (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/options/option-manager.js:368:12)\\n    at File.initOptions (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/index.js:212:65)\\n    at new File (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/file/index.js:135:24)\\n    at Pipeline.transform (/Users/brokeboi/Q-A/node_modules/babel-core/lib/transformation/pipeline.js:46:16)\\n    at transpile (/Users/brokeboi/Q-A/node_modules/babel-loader/lib/index.js:46:20)\\n    at Object.module.exports (/Users/brokeboi/Q-A/node_modules/babel-loader/lib/index.js:163:20)\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///0\n");
 
 /***/ })
-
-/******/ });
+/******/ ]);

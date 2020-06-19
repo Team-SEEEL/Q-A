@@ -2,10 +2,15 @@ var faker = require('faker/locale/en_US.js');
 const {db} = require('./index.js')
 const QandA = require('./QandA.js');
 
+db.dropDatabase( (err, data) => {
+  if (err) { console.log( 'did not delete' ) }
+  else {
+    console.log(data);
+  }
+} )
 
 
 let sampleQuestionData = [];
-
 let sampleAnswerData = [];
 
 for (var i = 0; i < 100; i++) {
@@ -39,8 +44,13 @@ const insertQuestions = () => {
 
 const insertAnswers = () => {
   QandA.Answers.create(sampleAnswerData)
+  .then(() => {db.close()})
 }
 
+insertQuestions();
+insertAnswers();
 
 
-Promise.all([insertQuestions, insertAnswers]).then(db.close())
+
+
+
