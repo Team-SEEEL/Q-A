@@ -21,9 +21,9 @@ for (var j = 0; j < 200; j++) {
   var randomVote = faker.random.number();
   var randomName = faker.name.findName();
   var isSeller = faker.random.boolean();
-  function Answer(answer, vote, name, seller) {
+  function Answer(answer, votes, name, seller) {
     this.answer = randomAnswer;
-    this.vote = randomVote;
+    this.votes = randomVote;
     this.name = randomName;
     this.seller = isSeller;
   }
@@ -34,6 +34,7 @@ for (var j = 0; j < 200; j++) {
 }
 
 
+
 for (var i = 0; i < 100; i++) {
   let numOfAnswers = Math.floor((Math.random() * 3))
   let answered = [];
@@ -41,12 +42,12 @@ for (var i = 0; i < 100; i++) {
     answered.push(sampleAnswerData.pop());
   }
   var randomQuestion = faker.hacker.phrase();
-  function Question(body) {
+  function Question(body, answered) {
     this.body = randomQuestion + '?';
     this.answers = answered;
   }
 
-  const questions = new Question(randomQuestion);
+  const questions = new Question(randomQuestion, answered);
   sampleQuestionData.push(questions);
 }
 
