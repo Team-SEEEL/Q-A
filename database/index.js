@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Autoincrement = require('mongoose-sequence')(mongoose)
 mongoose.connect('mongodb://localhost/api', {useNewUrlParser: true});
 
 const db = mongoose.connection;

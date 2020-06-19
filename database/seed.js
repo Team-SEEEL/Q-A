@@ -13,7 +13,8 @@ db.dropDatabase( (err, data) => {
 let sampleQuestionData = [];
 let sampleAnswerData = [];
 
-let numOfAnswers = Math.floor((Math.random() * 20 + 1) / 10)
+
+
 
 for (var j = 0; j < 200; j++) {
   var randomAnswer = faker.company.catchPhrase();
@@ -32,15 +33,13 @@ for (var j = 0; j < 200; j++) {
   sampleAnswerData.push(answers);
 }
 
-let copiedAns = sampleAnswerData.slice();
 
 for (var i = 0; i < 100; i++) {
+  let numOfAnswers = Math.floor((Math.random() * 3))
   let answered = [];
   for (var k = 0; k < numOfAnswers; k++) {
-    answered.push(copiedAns.pop());
+    answered.push(sampleAnswerData.pop());
   }
-
-
   var randomQuestion = faker.hacker.phrase();
   function Question(body) {
     this.body = randomQuestion;
@@ -55,13 +54,7 @@ const insertQuestions = () => {
   QandA.Questions.create(sampleQuestionData)
 };
 
-const insertAnswers = () => {
-  QandA.Answers.create(sampleAnswerData)
-  .then(() => {db.close()})
-}
-
 insertQuestions();
-insertAnswers();
 
 
 
