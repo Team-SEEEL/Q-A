@@ -26,8 +26,8 @@ const findAnswers = (query, callback) => {
   Questions.find(query, 'answers', callback);
 }
 
-const findAndVote = () => {
-  // Q.findOneandUpdate
+const findAndVote = (filter, update) => {
+  Questions.findOneandUpdate(filter, update)
 }
 
 module.exports = {
