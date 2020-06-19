@@ -1,5 +1,5 @@
 var faker = require('faker/locale/en_US.js');
-const db = require('./index.js')
+const {db} = require('./index.js')
 const QandA = require('./QandA.js');
 
 
@@ -34,14 +34,13 @@ for (var i = 0; i < 100; i++) {
 }
 
 const insertQuestions = () => {
-  Questions.create(sampleQuestionData)
-  .then(() => db.disconnect());
+  QandA.Questions.create(sampleQuestionData)
 };
 
 const insertAnswers = () => {
-  Answers.create(sampleAnswerData)
-  .then(() => db.disconnect());
+  QandA.Answers.create(sampleAnswerData)
 }
 
-insertAnswers();
-insertQuestions();
+
+
+Promise.all([insertQuestions, insertAnswers]).then(db.close())
