@@ -26,8 +26,13 @@ app.get('/api/answers', (req,res) => {
   })
 })
 
-app.post('api/questions', (req, res) => {
-  db.findAndVote( { _id: 1 }, {} )
+app.post('/api/questions', (req, res) => {
+  db.findAndVote({ "answers.0": { "$exists": true } }, { $inc: { votes: 1 } }, (err, data) => {
+    if (err) { res.status(404).send(err) }
+    else {
+      res.status(201).send(data)
+    }
+  })
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
