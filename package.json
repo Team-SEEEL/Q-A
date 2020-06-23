@@ -10,7 +10,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "dev:react": "webpack -d --watch",
-    "db:setup": "node database/seed.js"
+    "db:setup": "node database/seed.js",
+    "test": "jest"
   },
   "dependencies": {
     "async": "^3.2.0",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
+    "babel-jest": "^26.0.1",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.4.1",
     "chai": "^4.2.0",
