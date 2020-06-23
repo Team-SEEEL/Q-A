@@ -5,8 +5,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       text: '',
-      question: ''
-    }
+      question: '',
+    };
+  }
+
+  render() {
+    return (
+      <form>Have a question? Search for answers</form>
+    );
   }
 }
 
