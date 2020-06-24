@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose)
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const db = require('./index.js');
 
 mongoose.Promise = global.Promise;
@@ -23,7 +23,7 @@ const findQuestions = (query, callback) => {
 };
 
 const findAnswers = (query, callback) => {
-  Questions.find(query, 'answers', callback);
+  Questions.find({ $or: [query, { 'answers.answer': { $regex: query.body, $options: 'i' } }] }, callback);
 };
 
 const findAndVote = (filter, update) => {

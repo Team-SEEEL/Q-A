@@ -1,10 +1,10 @@
 import React from 'react';
-import Entries from './answweredQuestionsEntry.jsx';
+import Entries from './answeredQuestionsEntry.jsx';
 
-const answeredQuestions = props => (
+const answeredQuestions = (props) => (
   <ul className="questions">
     {
-      props.questions.map( answered => (
+      props.questions.map((answered) => (
         <Entries entry={answered} />
       ))
     }

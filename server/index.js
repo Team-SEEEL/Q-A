@@ -6,6 +6,8 @@ const db = require('../database/QandA.js');
 const app = express();
 const port = 3000;
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/questions', (req, res) => {
@@ -19,7 +21,7 @@ app.get('/api/questions', (req, res) => {
 });
 
 app.get('/api/answers', (req, res) => {
-  db.findAnswers({}, (err, data) => {
+  db.findAnswers({ body: req.query[0] }, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
