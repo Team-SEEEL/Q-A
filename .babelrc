@@ -1,11 +1,7 @@
 {
   "presets": [
     "@babel/preset-env",
-<<<<<<< HEAD
-    "react-app"
-=======
     "@babel/preset-react",
     "airbnb"
->>>>>>> 69bf0e5bfae65df2861ff52db6687d2e5006aa17
   ]
 }
