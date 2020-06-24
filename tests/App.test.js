@@ -6,12 +6,12 @@ import App from '../client/src/Components/App';
 const axios = require('axios');
 
 describe('<App />', () => {
-  it('Should return questions with a GET request', () => {
-    return axios.get('http://localhost:3000/api/questions')
-      .then((response) => {
-        expect(response.data).toHaveLength(100);
-      });
-  });
+  // it('Should return questions with a GET request', () => {
+  //   return axios.get('http://localhost:3000/api/questions')
+  //     .then((response) => {
+  //       expect(response.data).toHaveLength(100);
+  //     });
+  // });
 
   it('Should render correctly', () => {
     const wrapper = shallow(<App />);
