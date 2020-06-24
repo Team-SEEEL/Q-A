@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 
 class App extends React.Component {
@@ -11,7 +12,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <form>Have a question? Search for answers</form>
+      <div className="main-container">
+        <form>Have a question? Search for answers</form>
+      </div>
     );
   }
 }

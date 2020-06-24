@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable object-curly-newline */
+/* eslint-disable import/no-extraneous-dependencies */
 import { mount, render, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';

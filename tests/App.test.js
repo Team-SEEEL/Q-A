@@ -1,11 +1,22 @@
-import App from '../client/src/Components/App.jsx';
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-undef */
+import App from '../client/src/Components/App';
+
+const axios = require('axios');
 
 describe('<App />', () => {
+  it('Should return questions with a GET request', () => {
+    return axios.get('http://localhost:3000/api/questions')
+      .then((response) => {
+        expect(response.data).toHaveLength(100);
+      });
+  });
 
   it('Should render correctly', () => {
     const wrapper = shallow(<App />);
     expect(wrapper).toMatchSnapshot();
-  })
+  });
 
   it('Should render 12 question components', () => {
     const wrapper = shallow(<App />);
@@ -15,10 +26,10 @@ describe('<App />', () => {
   it('Should render children when passed in', () => {
     const wrapper = shallow((
       <App>
-        <div className='unique'></div>
+        <div className="unique" />
       </App>
     ));
-    expect(wrapper.contains(<div className='unique' />).to.equal(true));
+    expect(wrapper.contains(<div className="unique" />).to.equal(true));
   });
 
   it('Should simulate click events', () => {
@@ -31,21 +42,20 @@ describe('<App />', () => {
   it('Should simulate typing', () => {
     const onKeystroke = sinon.spy();
     const wrapper = shallow(<App onKeystroke={onKeystroke} />);
-    wrapper.find('form').simulate(change);
+    wrapper.find('form').simulate('change');
     expect(onKeystroke).to.have.property('callCount', 1);
   });
 
   it('Should change state when onKeystroke() is called', () => {
     const wrapper = shallow(<App />);
-    wrapper.instance().onKeystroke(event);
-    expect(wrapper.state()).toEqual({ text: event.target });
+    wrapper.instance().onKeystroke('event');
+    expect(wrapper.state()).toEqual({ text: 'event' });
   });
 
   it('Should update a state in a callback', () => {
     const wrapper = shallow(<App />);
     wrapper.setState({ question: 'new' }, () => {
-      expect(wrapper.state()).toEqual({ question: 'new' });
+      expect(wrapper.state()).toEqual({ question: 'new', text: '' });
     });
   });
-
 });
