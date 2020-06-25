@@ -26,7 +26,8 @@
     "mongoose-sequence": "^5.2.2",
     "node": "^14.4.0",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -62,6 +63,10 @@
     "semver": "^7.3.2",
     "sinon": "^9.0.2",
     "underscore": "^1.8.3",
+    "url-loader": "^4.1.0",
     "webpack": "^2.7.0"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }

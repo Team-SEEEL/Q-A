@@ -2,11 +2,13 @@ import React from 'react';
 
 const voteArrows = (props) => {
   return (
-    <select className="arrows">
-      <option value="upvote" />
+    <div className="left-element">
+      <span>&#8657;</span>
+      <br />
       {props.votes}
-      <option value="downvote" />
-    </select>
+      <br />
+      <span>&#8659;</span>
+    </div>
   );
 };
 

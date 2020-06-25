@@ -31,7 +31,7 @@ app.get('/api/answers', (req, res) => {
   });
 });
 
-app.post('/api/questions', (req, res) => {
+app.patch('/api/questions', (req, res) => {
   db.findAndVote({ _id: 1 }, {});
 });
 
