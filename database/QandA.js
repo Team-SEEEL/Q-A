@@ -14,6 +14,8 @@ const questionsSchema = new mongoose.Schema({
       name: String,
     },
   ],
+}, {
+  timestamps: { createdAt: true, updatedAt: false },
 });
 
 const Questions = mongoose.model('Questions', questionsSchema);

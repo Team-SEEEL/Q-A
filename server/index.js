@@ -11,7 +11,8 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/questions', (req, res) => {
-  db.findQuestions({}, (err, data) => {
+  const query = { 'answers.0': { $exists: true } };
+  db.findQuestions(query, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {

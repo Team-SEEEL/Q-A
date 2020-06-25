@@ -1,7 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import SearchForm from './searchForm.jsx';
+import AnsweredQuestions from './answeredQuestions.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +18,9 @@ class App extends React.Component {
   searchQuestions(query) {
     axios.get('/api/answers', { params: query })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         this.setState({ questions: response.data });
+        console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
@@ -25,12 +28,20 @@ class App extends React.Component {
   }
 
   render() {
+    if (this.state.questions.length === 0) {
+      axios.get('/api/questions')
+        .then((response) => {
+          this.setState({ questions: response.data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     return (
       <div className="main-container">
         <h2>Customer questions & answers</h2>
         <SearchForm search={this.searchQuestions} />
-        {/* <VoteArrows />
-        <AnsweredQuestions questions={}/> */}
+        <AnsweredQuestions questions={this.state.questions} />
       </div>
     );
   }
