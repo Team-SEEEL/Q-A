@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import Icon from '../../../public/searchIcon.png';
 
 const StyledIcon = styled.input`
-  top: 90px;
-  right: 95%;
+  top: 98px;
+  right: 96%;
   z-index: 2;
   position: absolute;
   background-image: url(${Icon});
@@ -48,7 +48,7 @@ class searchForm extends React.Component {
       <StyledForm action="/api/answers" method="get">
         {/* <input type="image" id="icon" alt="searchIcon" src={Icon} /> */}
         <StyledIcon type="submit" value="" />
-        <Input type="text" name="body" value={this.state.body} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
+        <Input type="text" id="search" name="body" value={this.state.body} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
       </StyledForm>
     );
   }

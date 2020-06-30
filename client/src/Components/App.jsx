@@ -2,10 +2,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import SearchForm from './searchForm.jsx';
 import AnsweredQuestions from './answeredQuestions.jsx';
 import NavTabs from './navigationTabs.jsx';
 import PostQuestion from './postQuestion.jsx';
+import Votes from './voteArrows.jsx';
+
+const StyledContainer = styled.div`
+  border-top : 1px solid grey;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -21,9 +27,7 @@ class App extends React.Component {
   searchQuestions(query) {
     axios.get('/api/answers', { params: query })
       .then((response) => {
-        console.log(response.data);
         this.setState({ text: query, questions: response.data, view: 'search' });
-        console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
@@ -41,25 +45,23 @@ class App extends React.Component {
         });
     } else if (this.state.view === 'search') {
       return (
-        <div>
-          <div className="main-container">
+        <div className="main-container">
+          <StyledContainer>
             <h2>Customer questions & answers</h2>
-            <SearchForm search={this.searchQuestions} />
+            <SearchForm search={this.searchQuestions} value={this.state.text}/>
             <NavTabs />
-            <AnsweredQuestions questions={this.state.questions} />
-          </div>
-          <div className="post">
+            <AnsweredQuestions questions={this.state.questions} searched={this.state.text}/>
+          </StyledContainer>
             <PostQuestion post={this.postQuestion} />
-          </div>
         </div>
       );
     }
     return (
-      <div className="main-container">
+      <StyledContainer>
         <h2>Customer questions & answers</h2>
         <SearchForm search={this.searchQuestions} />
         <AnsweredQuestions questions={this.state.questions} />
-      </div>
+      </StyledContainer>
     );
   }
 }

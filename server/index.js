@@ -9,6 +9,7 @@ const port = 3000;
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/api/questions', (req, res) => {
   const query = { 'answers.0': { $exists: true } };
@@ -32,7 +33,27 @@ app.get('/api/answers', (req, res) => {
 });
 
 app.patch('/api/questions', (req, res) => {
-  db.findAndVote({ _id: 1 }, {});
+  console.log(req.body.questID, req.body.voteID);
+  let increment = { $inc: { 'answers.$.votes': 1 } };
+  let decrement = { $inc: { 'answers.$.votes': -1 } };
+  let query = { _id: req.body.questID, 'answers._id': req.body.voteID };
+  if (req.body.query === 'up') {
+    db.findAndVote(query, increment, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  } else if (req.body.query === 'down') {
+    db.findAndVote(query, decrement, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  }
 });
 
 // eslint-disable-next-line no-console

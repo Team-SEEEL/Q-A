@@ -28,12 +28,13 @@ const findAnswers = (query, callback) => {
   Questions.find({ $or: [query, { 'answers.answer': { $regex: query.body, $options: 'i' } }] }, callback);
 };
 
-const findAndVote = (filter, update) => {
-  Questions.findOneandUpdate(filter, update);
+const findAndVote = (filter, update, callback) => {
+  return Questions.update(filter, update, callback);
 };
 
 module.exports = {
   Questions,
   findQuestions,
   findAnswers,
+  findAndVote,
 };

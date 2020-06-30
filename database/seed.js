@@ -19,7 +19,7 @@ const sampleAnswerData = [];
 
 for (let j = 0; j < 200; j += 1) {
   const randomAnswer = faker.company.catchPhrase();
-  const randomVote = faker.random.number();
+  const randomVote = faker.random.number(200);
   const randomName = faker.name.findName();
   const isSeller = faker.random.boolean();
   function Answer(answer, votes, name, seller) {

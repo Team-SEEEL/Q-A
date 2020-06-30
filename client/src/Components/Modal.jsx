@@ -1,19 +1,26 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
-const Modal = ({ show, handleClose }) => {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-  if (show === false) {
-    return null;
+const modalRoot = document.getElementById('modal');
+
+class Modal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.element = document.createElement('div');
   }
-  return (
-    <div className={showHideClassName}>
-      <section className="modal-main">
-        <button onClick={handleClose}>close</button>
-        <p>MODAL SHOWN</p>
-      </section>
-    </div>
-  );
-};
+
+  componentDidMount() {
+    modalRoot.appendChild(this.element);
+  }
+
+  componentWillUnmount() {
+    modalRoot.removeChild(this.element);
+  }
+
+  render() {
+    return createPortal(this.props.children, this.element);
+  }
+}
 
 export default Modal;
