@@ -160,7 +160,7 @@ class PostQuestion extends React.Component {
                       </StyledClose>
                     </TopBar>
                     <StyledTextArea placeholder="Please enter a question." cols="60" rows="4" />
-                    <StyledDescript>Your question may be answered by sellers, manufacturers, or customers who purchased this item, who are all part of the Amazon community.</StyledDescript>
+                    <StyledDescript>Your question may be answered by sellers, manufacturers, or customers who purchased this item, who are all part of the Amoozon community.</StyledDescript>
                     <StyledCloseButton onClick={this.toggleModal}>Cancel</StyledCloseButton>
                     <StyledPostButton>Post</StyledPostButton>
                   </StyledModal>

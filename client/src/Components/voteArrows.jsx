@@ -70,17 +70,15 @@ class voteArrows extends React.Component {
 
   upvote(event) {
     event.preventDefault();
-    this.setState({ glow: true });
-    if (this.state.glow === true) {
-      axios.patch('/api/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
+    this.setState({ glow: true }, axios.patch('/api/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  });
+}
 
   downvote(event) {
     event.preventDefault();
