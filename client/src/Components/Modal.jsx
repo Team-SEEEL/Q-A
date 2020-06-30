@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
-const modalRoot = document.getElementById('modal');
+const modalRoot = document.getElementById('qanda-modal');
 
 class Modal extends React.Component {
   constructor(props) {
