@@ -72,7 +72,7 @@ class voteArrows extends React.Component {
     event.preventDefault();
     this.setState({ glow: true });
     if (this.state.glow === true) {
-      axios.patch('/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
+      axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
         .then((response) => {
           console.log(response);
         })
@@ -86,7 +86,7 @@ class voteArrows extends React.Component {
     event.preventDefault();
     this.setState({ glow: true });
     if (this.state.glow === true) {
-      axios.patch('/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'down' })
+      axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'down' })
         .then((response) => {
           console.log(response);
         })

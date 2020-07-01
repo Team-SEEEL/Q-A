@@ -4,6 +4,7 @@ import Modal from './Modal.jsx';
 
 const Background = styled.div`
   position: absolute;
+  margin: auto;
   width: 100%;
   height: 100%;
   top: 0;

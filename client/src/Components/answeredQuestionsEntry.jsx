@@ -29,13 +29,9 @@ const StyledBody = styled.div`
   margin-left: 14%;
 `;
 
-const Entries = (props) =>
-  // let filteredQuestions = props.entry.body.filter(
-  //   (question) => {
-  //     return question.body.indexOf(this.state.search) !== -1;
-  //   }
-  // );
-  (
+const Entries = (props) => {
+  console.log(props.entry);
+  return (
     <StyledListItem>
       <VoteArrows votes={props.entry.answers[0].votes} voteID={props.entry.answers[0]._id} questID={props.entry._id} />
       <StyledRight>
@@ -63,5 +59,6 @@ const Entries = (props) =>
       </StyledRight>
     </StyledListItem>
   );
+};
 
 export default Entries;
