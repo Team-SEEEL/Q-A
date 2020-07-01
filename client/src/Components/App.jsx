@@ -7,7 +7,6 @@ import SearchForm from './searchForm.jsx';
 import AnsweredQuestions from './answeredQuestions.jsx';
 import NavTabs from './navigationTabs.jsx';
 import PostQuestion from './postQuestion.jsx';
-import Votes from './voteArrows.jsx';
 
 const StyledContainer = styled.div`
   border-top : 1px solid grey;
@@ -20,23 +19,35 @@ class App extends React.Component {
       text: '',
       view: 'home',
       questions: [],
+      filteredQuestions: [],
     };
     this.searchQuestions = this.searchQuestions.bind(this);
   }
 
+  // componentDidMount() {
+  //   if (window.)
+  // }
+
   searchQuestions(query) {
-    axios.get('/api/answers', { params: query })
-      .then((response) => {
-        this.setState({ text: query, questions: response.data, view: 'search' });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.setState({ filteredQuestions: [] });
+    let searchResults = [...this.state.questions];
+    query = query.toLowerCase();
+    // axios.get('/api/products/1/answers', { params: query })
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.setState({ text: query, questions: response.data, view: 'search' });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    const { questions } = this.state;
+    searchResults = searchResults.filter((question) => question.answers.every((answer) => answer.answer.toLowerCase().includes(query)) || question.body.toLowerCase().includes(query));
+    this.setState({ filteredQuestions: searchResults, view: 'search', text: query });
   }
 
   render() {
     if (this.state.questions.length === 0 && this.state.view === 'home') {
-      axios.get('/api/questions')
+      axios.get('/api/products/1')
         .then((response) => {
           this.setState({ questions: response.data });
         })
@@ -48,20 +59,23 @@ class App extends React.Component {
         <div className="main-container">
           <StyledContainer>
             <h2>Customer questions & answers</h2>
-            <SearchForm search={this.searchQuestions} value={this.state.text}/>
+            <SearchForm search={this.searchQuestions} value={this.state.text} />
             <NavTabs />
-            <AnsweredQuestions questions={this.state.questions} searched={this.state.text}/>
-          </StyledContainer>
+            <AnsweredQuestions questions={this.state.filteredQuestions} searched={this.state.text} />
             <PostQuestion post={this.postQuestion} />
+          </StyledContainer>
         </div>
       );
     }
     return (
-      <StyledContainer>
-        <h2>Customer questions & answers</h2>
-        <SearchForm search={this.searchQuestions} />
-        <AnsweredQuestions questions={this.state.questions} />
-      </StyledContainer>
+      <div className="main-container">
+        <StyledContainer>
+          <h2>Customer questions & answers</h2>
+          <SearchForm search={this.searchQuestions} value={this.state.text} />
+          <AnsweredQuestions questions={this.state.questions} />
+          <PostQuestion post={this.postQuestion} />
+        </StyledContainer>
+      </div>
     );
   }
 }

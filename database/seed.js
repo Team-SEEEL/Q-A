@@ -16,8 +16,9 @@ db.dropDatabase((err, data) => {
 
 const sampleQuestionData = [];
 const sampleAnswerData = [];
+const sampleProductData = [];
 
-for (let j = 0; j < 200; j += 1) {
+for (let j = 0; j < 20000; j += 1) {
   const randomAnswer = faker.company.catchPhrase();
   const randomVote = faker.random.number(200);
   const randomName = faker.name.findName();
@@ -34,7 +35,7 @@ for (let j = 0; j < 200; j += 1) {
   sampleAnswerData.push(answers);
 }
 
-for (let i = 0; i < 100; i += 1) {
+for (let i = 0; i < 10000; i += 1) {
   const numOfAnswers = Math.floor((Math.random() * 3));
   const answered = [];
   for (let k = 0; k < numOfAnswers; k += 1) {
@@ -50,8 +51,22 @@ for (let i = 0; i < 100; i += 1) {
   sampleQuestionData.push(questions);
 }
 
+for (let k = 0; k < 100; k += 1) {
+  const questionArr = [];
+  for (let x = 0; x < 100; x += 1) {
+    questionArr.push(sampleQuestionData.pop());
+  }
+  function Product(index, arr) {
+    this.index = k;
+    this.questions = arr;
+  }
+
+  const products = new Product(k, questionArr);
+  sampleProductData.push(products);
+}
+
 const insertQuestions = () => {
-  QandA.Questions.create(sampleQuestionData);
+  QandA.Products.create(sampleProductData);
 };
 
 insertQuestions();

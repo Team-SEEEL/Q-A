@@ -48,7 +48,7 @@ class searchForm extends React.Component {
       <StyledForm action="/api/answers" method="get">
         {/* <input type="image" id="icon" alt="searchIcon" src={Icon} /> */}
         <StyledIcon type="submit" value="" />
-        <Input type="text" id="search" name="body" value={this.state.body} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
+        <Input type="text" id="search" name="body" value={this.props.value} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
       </StyledForm>
     );
   }

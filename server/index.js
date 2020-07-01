@@ -11,49 +11,44 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/api/questions', (req, res) => {
-  const query = { 'answers.0': { $exists: true } };
-  db.findQuestions(query, (err, data) => {
+app.get('/api/products/:index', (req, res) => {
+  db.findQuestions({ index: req.params.index }, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.status(200).send(data);
+      const answers = data[0].questions.filter((question) => {
+        return question.answers.length > 0;
+      });
+      res.status(200).send(answers);
     }
   });
 });
 
-app.get('/api/answers', (req, res) => {
-  db.findAnswers({ body: req.query[0] }, (err, data) => {
+app.get('/api/products/:index/answers', (req, res) => {
+  db.findAnswers({ index: req.params.index }, (err, data) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.status(200).send(data);
+      console.log(data);
+      res.status(200).send(data.questions);
     }
   });
 });
 
-app.patch('/api/questions', (req, res) => {
-  console.log(req.body.questID, req.body.voteID);
-  let increment = { $inc: { 'answers.$.votes': 1 } };
-  let decrement = { $inc: { 'answers.$.votes': -1 } };
-  let query = { _id: req.body.questID, 'answers._id': req.body.voteID };
-  if (req.body.query === 'up') {
-    db.findAndVote(query, increment, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.status(200).send(data);
-      }
-    });
-  } else if (req.body.query === 'down') {
-    db.findAndVote(query, decrement, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.status(200).send(data);
-      }
-    });
-  }
+app.patch('/api/products/:index/questions', (req, res) => {
+
+  const increment = req.body.query === 'up' ? 1 : -1;
+
+  let query = { index: req.params.index };
+
+  db.findAndVote(query, increment, req.body.questID, req.body.voteID, (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      console.log(data);
+      // res.status(200).send(data);
+    }
+  });
 });
 
 // eslint-disable-next-line no-console

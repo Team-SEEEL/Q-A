@@ -26,6 +26,13 @@ class answeredQuestions extends React.Component {
 
   render() {
     const shownEntries = this.state.shown;
+    if (this.props.questions.length === 0) {
+      return (
+        <StyledList>
+          There are no questions for this product.
+        </StyledList>
+      );
+    }
     return (
       <StyledList>
         {

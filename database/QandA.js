@@ -4,37 +4,44 @@ const db = require('./index.js');
 
 mongoose.Promise = global.Promise;
 
-const questionsSchema = new mongoose.Schema({
-  body: String,
-  answers: [
+const productsSchema = new mongoose.Schema({
+  index: Number,
+  questions: [
     {
-      answer: String,
-      votes: Number,
-      seller: Boolean,
-      name: String,
+      body: String,
+      answers: [
+        {
+          answer: String,
+          votes: Number,
+          seller: Boolean,
+          name: String,
+        },
+      ],
+    }, {
+      timestamps: { createdAt: true, updatedAt: false },
     },
   ],
-}, {
-  timestamps: { createdAt: true, updatedAt: false },
 });
 
-const Questions = mongoose.model('Questions', questionsSchema);
+const Products = mongoose.model('Products', productsSchema);
+
+productsSchema.plugin(AutoIncrement, { id: 'index_seq', inc_field: 'index' });
 
 const findQuestions = (query, callback) => {
-  Questions.find(query, callback);
+  Products.find(query, callback);
 };
 
-const findAnswers = (query, callback) => {
-  Questions.find({ $or: [query, { 'answers.answer': { $regex: query.body, $options: 'i' } }] }, callback);
-};
-
-const findAndVote = (filter, update, callback) => {
-  return Questions.update(filter, update, callback);
+const findAndVote = (filter, update, _id1, _id2, callback) => {
+  // Products.findOne(filter, callback);
+  Products.findOne(filter, (err, data) => {
+    const answer = data.questions.id(_id1).answers.id(_id2);
+    answer.votes += update;
+    data.save();
+  });
 };
 
 module.exports = {
-  Questions,
+  Products,
   findQuestions,
-  findAnswers,
   findAndVote,
 };
