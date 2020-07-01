@@ -47,7 +47,7 @@ class App extends React.Component {
 
   render() {
     if (this.state.questions.length === 0 && this.state.view === 'home') {
-      axios.get('/api/products/1')
+      axios.get('/questions/api/products/1')
         .then((response) => {
           this.setState({ questions: response.data });
         })
