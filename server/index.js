@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const db = require('../database/QandA.js');
 
 const app = express();
@@ -49,6 +50,10 @@ app.patch('/questions/api/products/:index/questions', (req, res) => {
       // res.status(200).send(data);
     }
   });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public/index.html'));
 });
 
 // eslint-disable-next-line no-console

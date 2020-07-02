@@ -10,6 +10,9 @@ import PostQuestion from './postQuestion.jsx';
 
 const StyledContainer = styled.div`
   border-top : 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 class App extends React.Component {
@@ -24,37 +27,33 @@ class App extends React.Component {
     this.searchQuestions = this.searchQuestions.bind(this);
   }
 
-  // componentDidMount() {
-  //   if (window.)
-  // }
+  componentDidMount() {
+    let index;
+    if (window.location.pathname === '/') {
+      index = Math.floor(Math.random() * 101);
+    } else {
+      index = parseInt(window.location.pathname.slice(1));
+    }
+    axios.get(`/questions/api/products/${index}`)
+      .then((response) => {
+        this.setState({ questions: response.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   searchQuestions(query) {
     this.setState({ filteredQuestions: [] });
     let searchResults = [...this.state.questions];
     query = query.toLowerCase();
-    // axios.get('/api/products/1/answers', { params: query })
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.setState({ text: query, questions: response.data, view: 'search' });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     const { questions } = this.state;
     searchResults = searchResults.filter((question) => question.answers.every((answer) => answer.answer.toLowerCase().includes(query)) || question.body.toLowerCase().includes(query));
     this.setState({ filteredQuestions: searchResults, view: 'search', text: query });
   }
 
   render() {
-    if (this.state.questions.length === 0 && this.state.view === 'home') {
-      axios.get('/questions/api/products/1')
-        .then((response) => {
-          this.setState({ questions: response.data });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else if (this.state.view === 'search') {
+    if (this.state.view === 'search') {
       return (
         <div className="main-container">
           <StyledContainer>
