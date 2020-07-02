@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Modal from './Modal.jsx';
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   margin: auto;
   width: 100%;
   height: 100%;
@@ -27,7 +27,7 @@ const BottomBar = styled.div`
 
 const StyledModal = styled.div`
   background: #fff;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;

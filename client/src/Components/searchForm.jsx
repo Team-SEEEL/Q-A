@@ -4,14 +4,13 @@ import styled from 'styled-components';
 import Icon from '../../../public/searchIcon.png';
 
 const StyledIcon = styled.input`
-  top: 98px;
-  right: 96%;
+  left: 3%;
   z-index: 2;
-  position: absolute;
+  position: sticky;
   background-image: url(${Icon});
-  background-size: 20px 20px;
-  height: 20px;
-  width: 20px;
+  background-size: 18px 18px;
+  height: 18px;
+  width: 18px;
   border: none;
   padding-top: 5px;
 `;

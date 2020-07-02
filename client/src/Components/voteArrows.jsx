@@ -11,6 +11,7 @@ const StyledLeft = styled.div`
   position: relative;
   right: 50px;
   bottom: 25px;
+  margin-left: 5%;
 `;
 
 const StyledUpArrow = styled.button`

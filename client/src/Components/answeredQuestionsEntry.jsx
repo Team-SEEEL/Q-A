@@ -30,7 +30,6 @@ const StyledBody = styled.div`
 `;
 
 const Entries = (props) => {
-  console.log(props.entry);
   return (
     <StyledListItem>
       <VoteArrows votes={props.entry.answers[0].votes} voteID={props.entry.answers[0]._id} questID={props.entry._id} />
@@ -42,10 +41,10 @@ const Entries = (props) => {
           <strong>Answer:</strong>
         </StyledBox>
         <StyledBody>
-          <a href="#" id="myText">{ props.entry.body }</a>
+          <a href="#">{ props.entry.body }</a>
           <br />
           <br />
-          <span id="myText">{ props.entry.answers[0].answer }</span>
+          <span>{ props.entry.answers[0].answer }</span>
           <br />
           By
           {' '}
