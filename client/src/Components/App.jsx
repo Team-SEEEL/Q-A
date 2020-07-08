@@ -15,6 +15,10 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
+const HighLight = styled.span`
+  background-color: yellow;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);

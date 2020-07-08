@@ -15,10 +15,9 @@ const productsSchema = new mongoose.Schema({
           votes: Number,
           seller: Boolean,
           name: String,
+          time: String,
         },
       ],
-    }, {
-      timestamps: true,
     },
   ],
 });

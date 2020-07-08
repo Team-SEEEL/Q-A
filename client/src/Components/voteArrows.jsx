@@ -70,31 +70,23 @@ class voteArrows extends React.Component {
   }
 
   upvote(event) {
-    event.preventDefault();
-    this.setState({ glow: true });
-    if (this.state.glow === true) {
-      axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'up' })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   downvote(event) {
-    event.preventDefault();
-    this.setState({ glow: true });
-    if (this.state.glow === true) {
-      axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'down' })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    axios.patch('/questions/api/products/1/questions', { voteID: this.props.voteID, questID: this.props.questID, query: 'down' })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {

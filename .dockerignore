@@ -1,9 +1,5 @@
 node_modules
-Dockerfile*
-docker-compose.yml
 */tests*
 .git
 .gitignore
-docker-compose
-.dockerignore
 .vscode

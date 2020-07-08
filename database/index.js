@@ -3,7 +3,9 @@
 const mongoose = require('mongoose');
 const Autoincrement = require('mongoose-sequence')(mongoose);
 
-mongoose.connect('mongodb://database:27017/api', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/api', { useNewUrlParser: true });
+// mongoose.connect('mongodb://172.17.0.2/api', { useNewUrlParser: true });
+
 
 const db = mongoose.connection;
 // eslint-disable-next-line no-console
