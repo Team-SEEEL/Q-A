@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-inner-declarations */
 /* eslint-disable no-console */
+const moment = require('moment');
 const faker = require('faker/locale/en_US.js');
 const { db } = require('./index.js');
 const QandA = require('./QandA.js');
@@ -23,14 +24,16 @@ for (let j = 0; j < 20000; j += 1) {
   const randomVote = faker.random.number(200);
   const randomName = faker.name.findName();
   const isSeller = faker.random.boolean();
+  const randomDate = moment(faker.date.past(2)).format('MMM Do YYYY');
   function Answer(answer, votes, name, seller) {
     this.answer = randomAnswer;
     this.votes = randomVote;
     this.name = randomName;
     this.seller = isSeller;
+    this.time = randomDate;
   }
 
-  const answers = new Answer(randomAnswer, randomVote, randomName, isSeller);
+  const answers = new Answer(randomAnswer, randomVote, randomName, isSeller, randomDate);
 
   sampleAnswerData.push(answers);
 }
@@ -70,3 +73,4 @@ const insertQuestions = () => {
 };
 
 insertQuestions();
+db.close();

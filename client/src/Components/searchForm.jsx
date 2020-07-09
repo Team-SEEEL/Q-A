@@ -3,10 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '../../../public/searchIcon.png';
 
+const SearchWrapper = styled.div`
+  height: 30px;
+`;
+
 const StyledIcon = styled.input`
-  left: 3%;
+  left: 2%;
   z-index: 2;
-  position: sticky;
+  position: relative;
   background-image: url(${Icon});
   background-size: 18px 18px;
   height: 18px;
@@ -46,8 +50,10 @@ class searchForm extends React.Component {
     return (
       <StyledForm>
         {/* <input type="image" id="icon" alt="searchIcon" src={Icon} /> */}
-        <StyledIcon type="submit" value="" />
-        <Input type="text" id="search" name="body" value={this.props.value} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
+        <SearchWrapper>
+          <StyledIcon type="submit" value="" />
+          <Input type="text" id="search" name="body" value={this.props.value} placeholder="Have a question?Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
+        </SearchWrapper>
       </StyledForm>
     );
   }

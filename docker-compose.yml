@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    image: itsmeerik/questions:server
+    build: .
+    depends_on:
+      - 'database'
+    ports:
+      - '3003:3003'
+    volumes:
+      - '.:/src/app/'
+      - '/src/app/node_modules'
+    command: 'npm start'
+    environment:
+      - 'NODE_ENV=production'
+
+  database:
+    image: mongo:latest
+    restart: 'always'

@@ -15,6 +15,10 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
+const HighLight = styled.span`
+  background-color: yellow;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +34,7 @@ class App extends React.Component {
   componentDidMount() {
     let index;
     if (window.location.pathname === '/') {
-      index = Math.floor(Math.random() * 101);
+      index = Math.floor(Math.random() * 100);
     } else {
       index = parseInt(window.location.pathname.slice(1));
     }

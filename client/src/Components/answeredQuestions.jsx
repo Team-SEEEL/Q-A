@@ -15,17 +15,30 @@ class answeredQuestions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      clicked: false,
       shown: 4,
     };
     this.handleCLick = this.handleClick.bind(this);
+    this.alwaysPositive = this.alwaysPositive.bind(this);
+  }
+
+  alwaysPositive(min) {
+    let diff = min - this.state.shown;
+    if (diff <= 0) {
+      diff = 0;
+    } else {
+      return diff;
+    }
+    return diff;
   }
 
   handleClick() {
-    this.setState({ shown: this.state.shown + 4 });
+    this.setState({ shown: this.state.shown + 4, clicked: true });
   }
 
   render() {
     const shownEntries = this.state.shown;
+    const total = this.props.questions.length;
     if (this.props.questions.length === 0) {
       return (
         <StyledList>
@@ -42,7 +55,7 @@ class answeredQuestions extends React.Component {
         }
         <StyledShowMore onClick={() => this.handleClick()}>
           See more answered questions (
-          {this.props.questions.length - shownEntries}
+          {this.alwaysPositive(total)}
           )
         </StyledShowMore>
       </StyledList>
