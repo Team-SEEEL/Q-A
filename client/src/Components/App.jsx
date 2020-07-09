@@ -27,6 +27,7 @@ class App extends React.Component {
       view: 'home',
       questions: [],
       filteredQuestions: [],
+      page: '',
     };
     this.searchQuestions = this.searchQuestions.bind(this);
   }
@@ -40,7 +41,7 @@ class App extends React.Component {
     }
     axios.get(`/questions/api/products/${index}`)
       .then((response) => {
-        this.setState({ questions: response.data });
+        this.setState({ questions: response.data, page: index });
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +77,7 @@ class App extends React.Component {
           <h2>Customer questions & answers</h2>
           <SearchForm search={this.searchQuestions} value={this.state.text} />
           <AnsweredQuestions questions={this.state.questions} />
-          <PostQuestion post={this.postQuestion} />
+          <PostQuestion post={this.postQuestion} page={this.state.page} />
         </StyledContainer>
       </div>
     );

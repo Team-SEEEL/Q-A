@@ -30,6 +30,10 @@ const findQuestions = (query, callback) => {
   Products.find(query, callback);
 };
 
+const postQuestions = (query, callback) => {
+  Products.create(query, callback);
+};
+
 const findAndVote = (filter, update, _id1, _id2, callback) => {
   // Products.findOne(filter, callback);
   Products.findOne(filter, (err, data) => {
@@ -43,4 +47,5 @@ module.exports = {
   Products,
   findQuestions,
   findAndVote,
+  postQuestions,
 };

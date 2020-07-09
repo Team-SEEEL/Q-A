@@ -43,7 +43,6 @@ class Entries extends React.Component {
           </span>
         ))}
         {' '}
-
       </span>
     );
   }
