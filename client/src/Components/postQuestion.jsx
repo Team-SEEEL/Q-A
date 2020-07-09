@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Modal from './Modal.jsx';
 
@@ -135,12 +136,30 @@ class PostQuestion extends React.Component {
       showModal: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.post = this.post.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   toggleModal() {
     this.setState({
       showModal: !this.state.showModal,
     });
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  post() {
+    axios.post(`/questions/api/products/${this.props.page}`, { 'question': this.state.body })
+      .then((response) => {
+        // console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(this.setState({ body: '', showModal: !this.state.showModal }));
   }
 
   render() {
@@ -160,10 +179,10 @@ class PostQuestion extends React.Component {
                         x
                       </StyledClose>
                     </TopBar>
-                    <StyledTextArea placeholder="Please enter a question." cols="60" rows="4" />
+                    <StyledTextArea placeholder="Please enter a question." cols="60" rows="4" value={this.state.body} name="body" onChange={this.handleChange} type="text" />
                     <StyledDescript>Your question may be answered by sellers, manufacturers, or customers who purchased this item, who are all part of the Amoozon community.</StyledDescript>
                     <StyledCloseButton onClick={this.toggleModal}>Cancel</StyledCloseButton>
-                    <StyledPostButton onClick={this.toggleModal}>Post</StyledPostButton>
+                    <StyledPostButton onClick={this.post}>Post</StyledPostButton>
                   </StyledModal>
                   <Background onClick={this.toggleModal} />
                 </Modal>

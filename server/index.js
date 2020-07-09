@@ -35,11 +35,22 @@ app.get('/questions/api/products/:index/answers', (req, res) => {
   });
 });
 
+app.post('/questions/api/products/:index', (req, res) => {
+  const query = { 'questions.body': req.body.question };
+  db.postQuestions(query, (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
 app.patch('/questions/api/products/:index/questions', (req, res) => {
 
   const increment = req.body.query === 'up' ? 1 : -1;
 
-  let query = { index: req.params.index };
+  const query = { index: req.params.index };
 
   db.findAndVote(query, increment, req.body.questID, req.body.voteID, (err, data) => {
     if (err) {
