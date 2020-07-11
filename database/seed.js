@@ -24,19 +24,28 @@ for (let j = 0; j < 20000; j += 1) {
   const randomVote = faker.random.number(200);
   const randomName = faker.name.findName();
   const isSeller = faker.random.boolean();
-  const randomDate = moment(faker.date.past(2)).format('MMM Do YYYY');
-  function Answer(answer, votes, name, seller) {
+  const randomMonth = faker.date.month();
+  const randomDay = faker.random.number({
+    min: 1,
+    max: 28,
+  });
+  const randomYear = faker.random.number({
+    min: 2017,
+    max: 2020,
+  });
+  const randomDate = randomMonth + ' ' + randomDay + ', ' + randomYear;
+  function Answer(answer, votes, name, seller, time) {
     this.answer = randomAnswer;
     this.votes = randomVote;
     this.name = randomName;
     this.seller = isSeller;
     this.time = randomDate;
   }
-
   const answers = new Answer(randomAnswer, randomVote, randomName, isSeller, randomDate);
-
   sampleAnswerData.push(answers);
 }
+
+console.log(sampleAnswerData);
 
 for (let i = 0; i < 10000; i += 1) {
   const numOfAnswers = Math.floor((Math.random() * 3));
@@ -73,4 +82,3 @@ const insertQuestions = () => {
 };
 
 insertQuestions();
-db.close();

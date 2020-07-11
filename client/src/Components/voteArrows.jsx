@@ -4,14 +4,14 @@ import styled from 'styled-components';
 
 const StyledLeft = styled.div`
   width: 8%;
-  height: 80px;
+  height: 100px;
   float: left;
-  border-right: solid 1px grey;
   text-align: center;
   position: relative;
   right: 50px;
   bottom: 25px;
-  margin-left: 5%;
+  margin-left: 1%;
+  margin-botton 15px;
 `;
 
 const StyledUpArrow = styled.button`
@@ -27,7 +27,7 @@ const StyledUpArrow = styled.button`
   height: 0;
   width: 0;
   border-style: solid;
-  border-width: 0 15px 15px 15px;
+  border-width: 0 12px 15px 12px;
   border-color: transparent transparent #a1a1a1 transparent;
   margin-left: 17%;
   margin-bottom: 10px;
@@ -46,7 +46,7 @@ const StyledDownArrow = styled.button`
   height: 0;
   width: 0;
   border-style: solid;
-  border-width: 15px 15px 0px 15px;
+  border-width: 15px 12px 0px 12px;
   border-color: #a1a1a1 transparent transparent transparent;
   margin-left: 17%;
   margin-top: 10px;
