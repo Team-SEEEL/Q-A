@@ -55,13 +55,19 @@ const StyledClose = styled.button`
 `;
 
 const StyledToggle = styled.button`
+  &:hover {
+    background: silver;
+  }
   :focus {
     outline: none;
+    border-color: orange orange orange orange;
   }
   cursor: pointer;
-  background-color: blue;
   border: none;
-  color: white;
+  background: rgb(230,230,230);
+  background: linear-gradient(0deg, rgba(230,230,230,1) 0%, rgba(247,247,247,1) 100%);
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
   padding: 15px 15px;
   text-align: center;
   text-decoration: none;
@@ -71,7 +77,7 @@ const StyledToggle = styled.button`
   left: 350px;
   z-index: 1;
   position: relative;
-  border-radius: 2px;
+  border-radius: 5px;
 `;
 
 const TopBar = styled.div`
@@ -166,7 +172,7 @@ class PostQuestion extends React.Component {
     const { showModal } = this.state;
     return (
       <div>
-        <StyledToggle onClick={this.toggleModal}>
+        <StyledToggle id="postButton" onClick={this.toggleModal}>
           { !showModal ? 'Post your question' : 'Post your question' }
         </StyledToggle>
         {

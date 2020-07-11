@@ -1,6 +1,75 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const TabA = styled.button`
+  :focus {
+    font-weight: bold;
+    border-color: transparent transparent orange transparent;
+  }
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  outline: none;
+  display: inline-block;
+  height: 60px;
+  width: 80px;
+  padding: 5px;
+  background: transparent;
+  border-color: transparent transparent transparent transparent;
+`;
+
+const TabB = styled.button`
+  :focus {
+    font-weight: bold;
+    border-color: transparent transparent orange transparent;
+  }
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  outline: none;
+  display: inline-block;
+  height: 60px;
+  width: 200px;
+  padding: 5px;
+  background: transparent;
+  border-color: transparent transparent transparent transparent;
+`;
+
+const TabC = styled.button`
+  :focus {
+    font-weight: bold;
+    border-color: transparent transparent orange transparent;
+  }
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  outline: none;
+  display: inline-block;
+  height: 60px;
+  width: 200px;
+  padding: 5px;
+  background: transparent;
+  border-color: transparent transparent transparent transparent;
+`;
+
+const TabD = styled.button`
+  :focus {
+    font-weight: bold;
+    border-color: transparent transparent orange transparent;
+  }
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  outline: none;
+  display: inline-block;
+  height: 60px;
+  width: 200px;
+  padding: 5px;
+  background: transparent;
+  border-color: transparent transparent transparent transparent;
+`;
+
+const TabFolder = styled.div`
+  display: block;
+  border-bottom: solid silver 1px;
+`;
+
 class NavTabs extends React.Component {
   constructor(props) {
     super(props);
@@ -11,12 +80,12 @@ class NavTabs extends React.Component {
 
   render() {
     return (
-      <div>
-        <button type="button">All</button>
-        <button type="button">Product Information</button>
-        <button type="button">Customer Q&amp;A&apos;s</button>
-        <button type="button">Customer Reviews</button>
-      </div>
+      <TabFolder>
+        <TabA type="button">All</TabA>
+        <TabB type="button">Product Information</TabB>
+        <TabC type="button">Customer Q&amp;A&apos;s</TabC>
+        <TabD type="button">Customer Reviews</TabD>
+      </TabFolder>
     );
   }
 }
