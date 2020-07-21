@@ -1,9 +1,13 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import jquery from 'jquery';
+import PropTypes from 'prop-types';
+// eslint-disable-next-line import/extensions
 import Entries from './answeredQuestionsEntry.jsx';
 
 const StyledList = styled.ul`
+  padding-top: 20px;
   list-style-type: none;
 `;
 
@@ -37,7 +41,6 @@ class answeredQuestions extends React.Component {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      clicked: false,
       shown: 4,
     };
     this.handleCLick = this.handleClick.bind(this);
@@ -45,7 +48,8 @@ class answeredQuestions extends React.Component {
   }
 
   alwaysPositive(min) {
-    let diff = min - this.state.shown;
+    const { shown } = this.state;
+    let diff = min - shown;
     if (diff <= 0) {
       diff = 0;
     } else {
@@ -55,14 +59,16 @@ class answeredQuestions extends React.Component {
   }
 
   handleClick() {
-    this.setState({ shown: this.state.shown + 4, clicked: true });
+    this.setState((prevState) => ({ shown: prevState.shown + 4 }));
     // window.scrollTo(0, this.myRef.current.offsetTop);
   }
 
   render() {
-    const shownEntries = this.state.shown;
-    const total = this.props.questions.length;
-    if (this.props.questions.length === 0) {
+    const { shown } = this.state;
+    const { questions, searched } = this.props;
+    const shownEntries = shown;
+    const total = questions.length;
+    if (questions.length === 0) {
       return (
         <StyledList>
           There are no questions for this product.
@@ -72,8 +78,8 @@ class answeredQuestions extends React.Component {
     return (
       <StyledList ref={this.myRef}>
         {
-          this.props.questions.slice(0, shownEntries).map((answered) => (
-            <Entries entry={answered} search={this.props.searched} />
+          questions.slice(0, shownEntries).map((answered) => (
+            <Entries entry={answered} search={searched} />
           ))
         }
         <StyledShowMore onClick={() => this.handleClick()}>
@@ -85,5 +91,10 @@ class answeredQuestions extends React.Component {
     );
   }
 }
+
+answeredQuestions.propTypes = {
+  questions: PropTypes.array,
+  searched: PropTypes.string,
+};
 
 export default answeredQuestions;

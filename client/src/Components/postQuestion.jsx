@@ -1,3 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/require-default-props */
+/* eslint-disable max-len */
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -147,9 +152,7 @@ class PostQuestion extends React.Component {
   }
 
   toggleModal() {
-    this.setState({
-      showModal: !this.state.showModal,
-    });
+    this.setState((prevState) => ({ showModal: !prevState.showModal }));
   }
 
   handleChange(e) {
@@ -158,18 +161,20 @@ class PostQuestion extends React.Component {
   }
 
   post() {
-    axios.post(`/questions/api/products/${this.props.page}`, { 'question': this.state.body })
+    const { body, showModal } = this.state;
+    const { page } = this.props;
+    axios.post(`/questions/api/products/${page}`, { question: body })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       })
-      .finally(this.setState({ body: '', showModal: !this.state.showModal }));
+      .finally(this.setState({ body: '', showModal: !showModal }));
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, body } = this.state;
     return (
       <div>
         <StyledToggle id="postButton" onClick={this.toggleModal}>
@@ -178,15 +183,17 @@ class PostQuestion extends React.Component {
         {
               showModal ? (
                 <Modal>
-                  <StyledModal toggle={this.state.showModal}>
+                  <StyledModal toggle={showModal}>
                     <TopBar>
                       <StyledTitle><strong>Post your Question</strong></StyledTitle>
                       <StyledClose onClick={this.toggleModal}>
                         x
                       </StyledClose>
                     </TopBar>
-                    <StyledTextArea placeholder="Please enter a question." cols="60" rows="4" value={this.state.body} name="body" onChange={this.handleChange} type="text" />
-                    <StyledDescript>Your question may be answered by sellers, manufacturers, or customers who purchased this item, who are all part of the Amoozon community.</StyledDescript>
+                    <StyledTextArea placeholder="Please enter a question." cols="60" rows="4" value={body} name="body" onChange={this.handleChange} type="text" />
+                    <StyledDescript>
+                      Your question may be answered by sellers, manufacturers, or customers who purchased this item, who are all part of the Hackazon community.
+                    </StyledDescript>
                     <StyledCloseButton onClick={this.toggleModal}>Cancel</StyledCloseButton>
                     <StyledPostButton onClick={this.post}>Post</StyledPostButton>
                   </StyledModal>
