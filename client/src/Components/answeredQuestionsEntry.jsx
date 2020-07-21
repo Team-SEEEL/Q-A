@@ -1,10 +1,15 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/extensions */
 import React from 'react';
-import mongoose from 'mongoose';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import VoteArrows from './voteArrows.jsx';
 
 const AuthorNDate = styled.div`
-  margin-left: 134px;
+  margin-left: 130px;
   opacity: 0.5;
 `;
 
@@ -64,7 +69,6 @@ class Entries extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: '',
     };
     this.highlighter = this.highlighter.bind(this);
   }
@@ -74,8 +78,8 @@ class Entries extends React.Component {
     return (
       <span>
         {' '}
-        { parts.map((part, i) => (
-          <span key={i} style={part.toLowerCase() === highlight.toLowerCase() ? { backgroundColor: 'yellow' } : {}}>
+        { parts.map((part) => (
+          <span style={part.toLowerCase() === highlight.toLowerCase() ? { backgroundColor: 'yellow' } : {}}>
             { part }
           </span>
         ))}
@@ -85,10 +89,11 @@ class Entries extends React.Component {
   }
 
   render() {
-    if (this.props.search !== undefined) {
+    const { search, entry } = this.props;
+    if (search !== undefined) {
       return (
         <StyledListItem>
-          <VoteArrows votes={this.props.entry.answers[0].votes} voteID={this.props.entry.answers[0]._id} questID={this.props.entry._id} />
+          <VoteArrows votes={entry.answers[0].votes} voteID={entry.answers[0]._id} questID={entry._id} />
           <StyledRight>
             <StyledBox>
               <TitleOne>
@@ -100,19 +105,19 @@ class Entries extends React.Component {
             </StyledBox>
             <StyledBody>
               <StyledQuestion>
-                <a href="#">{ this.highlighter(this.props.entry.body, this.props.search) }</a>
+                <a href="#top">{ this.highlighter(entry.body, search) }</a>
               </StyledQuestion>
               <StyledAnswer>
-                { this.highlighter(this.props.entry.answers[0].answer, this.props.search) }
+                { this.highlighter(entry.answers[0].answer, search) }
               </StyledAnswer>
               <AuthorNDate>
                 By
                 {' '}
-                {this.props.entry.answers[0].name}
+                {entry.answers[0].name}
                 {' '}
                 on
                 {' '}
-                {this.props.entry.answers[0].time}
+                {entry.answers[0].time}
               </AuthorNDate>
             </StyledBody>
           </StyledRight>
@@ -121,7 +126,7 @@ class Entries extends React.Component {
     }
     return (
       <StyledListItem>
-        <VoteArrows votes={this.props.entry.answers[0].votes} voteID={this.props.entry.answers[0]._id} questID={this.props.entry._id} />
+        <VoteArrows votes={entry.answers[0].votes} voteID={entry.answers[0]._id} questID={entry._id} />
         <StyledRight>
           <StyledBox>
             <TitleOne>
@@ -133,19 +138,19 @@ class Entries extends React.Component {
           </StyledBox>
           <StyledBody>
             <StyledQuestion>
-              <a href="#">{ this.props.entry.body }</a>
+              <a href="#top">{ entry.body }</a>
             </StyledQuestion>
             <StyledAnswer>
-              { this.props.entry.answers[0].answer }
+              { entry.answers[0].answer }
             </StyledAnswer>
             <AuthorNDate>
               By
               {' '}
-              {this.props.entry.answers[0].name}
+              {entry.answers[0].name}
               {' '}
               on
               {' '}
-              {this.props.entry.answers[0].time}
+              {entry.answers[0].time}
             </AuthorNDate>
           </StyledBody>
         </StyledRight>
@@ -153,5 +158,10 @@ class Entries extends React.Component {
     );
   }
 }
+
+Entries.propTypes = {
+  search: PropTypes.string,
+  entry: PropTypes.object,
+};
 
 export default Entries;

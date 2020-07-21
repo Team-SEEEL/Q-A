@@ -17,9 +17,7 @@ app.get('/questions/api/products/:index', (req, res) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      const answers = data[0].questions.filter((question) => {
-        return question.answers.length > 0;
-      });
+      const answers = data[0].questions.filter((question) => question.answers.length > 0);
       res.status(200).send(answers);
     }
   });
@@ -47,7 +45,6 @@ app.post('/questions/api/products/:index', (req, res) => {
 });
 
 app.patch('/questions/api/products/:index/questions', (req, res) => {
-
   const increment = req.body.query === 'up' ? 1 : -1;
 
   const query = { index: req.params.index };

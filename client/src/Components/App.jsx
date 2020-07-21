@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
@@ -18,7 +19,7 @@ const rotate360 = keyframes`
 `;
 
 const Loader = styled.div`
-  visibility: ${props => props.view !== 'loading' ? 'hidden' : 'visible'};
+  visibility: ${(props) => (props.view !== 'loading' ? 'hidden' : 'visible')};
   animation: ${rotate360} 1s linear infinite;
   transform: translateZ(0);
   margin-left: 500px;
@@ -51,6 +52,7 @@ class App extends React.Component {
       page: '',
     };
     this.searchQuestions = this.searchQuestions.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +60,7 @@ class App extends React.Component {
     if (window.location.pathname === '/') {
       index = Math.floor(Math.random() * 100);
     } else {
+      // eslint-disable-next-line radix
       index = parseInt(window.location.pathname.slice(1));
     }
     axios.get(`/questions/api/products/${index}`)
@@ -65,48 +68,63 @@ class App extends React.Component {
         this.setState({ questions: response.data, page: index });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
+  changeView(options) {
+    this.setState({ view: options });
+  }
+
   searchQuestions(query) {
+    const { questions } = this.state;
     this.setState({ filteredQuestions: [] });
-    let searchResults = [...this.state.questions];
+    let searchResults = [...questions];
     query = query.toLowerCase();
-    const { questions, text, view } = this.state;
     searchResults = searchResults.filter((question) => question.answers.every((answer) => answer.answer.toLowerCase().includes(query)) || question.body.toLowerCase().includes(query));
     this.setState({ text: query, view: 'loading' });
     setTimeout(() => {
       if (this.state.text.length === 0) {
-        this.setState({ filteredQuestions: searchResults, view: 'home' });
+        this.setState({ filteredQuestions: searchResults }, () => {
+          this.changeView('home');
+        });
       } else {
-        this.setState({ filteredQuestions: searchResults, view: 'search' });
+        this.setState({ filteredQuestions: searchResults }, () => {
+          this.changeView('search');
+        });
       }
     }, 1200);
   }
 
   render() {
-    if (this.state.view === 'search') {
+    const {
+      view, text, page, questions, filteredQuestions,
+    } = this.state;
+    if (view === 'search') {
       return (
         <div className="main-container">
           <StyledContainer>
             <h2>Customer questions & answers</h2>
-            <SearchForm search={this.searchQuestions} value={this.state.text} />
-            <NavTabs searchBody={this.state.text} />
-            <AnsweredQuestions questions={this.state.filteredQuestions} searched={this.state.text} view={this.state.view} />
+            <SearchForm search={this.searchQuestions} value={text} />
+            <NavTabs searchBody={text} nav={this.changeView} />
+            <AnsweredQuestions questions={filteredQuestions} searched={text} view={view} />
             <PostQuestion post={this.postQuestion} />
           </StyledContainer>
         </div>
+      );
+    } if (view === 'info') {
+      return (
+        <div />
       );
     }
     return (
       <div className="main-container">
         <StyledContainer>
           <h2>Customer questions & answers</h2>
-          <SearchForm search={this.searchQuestions} value={this.state.text} />
-          <Loader view={this.state.view} />
-          <AnsweredQuestions questions={this.state.questions} />
-          <PostQuestion post={this.postQuestion} page={this.state.page} />
+          <SearchForm search={this.searchQuestions} value={text} />
+          <Loader view={view} />
+          <AnsweredQuestions questions={questions} />
+          <PostQuestion post={this.postQuestion} page={page} />
         </StyledContainer>
       </div>
     );

@@ -36,11 +36,11 @@ const postQuestions = (query, callback) => {
 
 const findAndVote = (filter, update, _id1, _id2, callback) => {
   // Products.findOne(filter, callback);
-  Products.findOne(filter, (err, data) => {
+  Products.findOneAndUpdate(filter, (err, data) => {
     const answer = data.questions.id(_id1).answers.id(_id2);
     answer.votes += update;
     data.save();
-  });
+  }, { new: true }, callback);
 };
 
 module.exports = {

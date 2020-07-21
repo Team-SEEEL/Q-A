@@ -1,5 +1,7 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const TabA = styled.button`
   :focus {
@@ -70,24 +72,13 @@ const TabFolder = styled.div`
   border-bottom: solid silver 1px;
 `;
 
-class NavTabs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      view: '',
-    };
-  }
-
-  render() {
-    return (
-      <TabFolder>
-        <TabA type="button">All</TabA>
-        <TabB type="button">Product Information</TabB>
-        <TabC type="button">Customer Q&amp;A&apos;s</TabC>
-        <TabD type="button">Customer Reviews</TabD>
-      </TabFolder>
-    );
-  }
-}
+const NavTabs = (props) => (
+  <TabFolder>
+    <TabA type="button">All</TabA>
+    <TabB type="button">Product Information</TabB>
+    <TabC type="button">Customer Q&amp;A&apos;s</TabC>
+    <TabD type="button">Customer Reviews</TabD>
+  </TabFolder>
+);
 
 export default NavTabs;

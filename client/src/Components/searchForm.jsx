@@ -1,6 +1,8 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Icon from '../../../public/searchIcon.png';
 
 const SearchWrapper = styled.div`
@@ -42,7 +44,7 @@ const Input = styled.input`
 `;
 
 const Xbutton = styled.button`
-  visibility: ${props => props.show ? 'visible' : 'hidden'};
+  visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
   position: relative;
   top: 2px;
   left: -58px;
@@ -53,7 +55,7 @@ const Xbutton = styled.button`
   font-size: 20px;
 `;
 
-class searchForm extends React.Component {
+const searchForm = class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,30 +68,39 @@ class searchForm extends React.Component {
 
   handleChange(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value }, this.props.search(value));
+    const { search } = this.props;
+    this.setState({ [name]: value }, search(value));
     if (value.length > 0) {
-      this.setState({ show: !this.state.show });
+      this.setState((prevState) => ({ show: !prevState.show }));
     }
   }
 
   handleClick(e) {
     e.preventDefault();
-    this.props.search('');
-    this.setState({ show: !this.state.show });
+    const { search } = this.props;
+    search('');
+    this.setState((prevState) => ({ show: !prevState.show }));
   }
 
   render() {
+    const { show } = this.state;
+    const { value } = this.props;
     return (
       <StyledForm>
         {/* <input type="image" id="icon" alt="searchIcon" src={Icon} /> */}
         <SearchWrapper>
           <StyledIcon type="submit" value="" />
-          <Input type="text" id="search" name="body" value={this.props.value} placeholder="Have a question? Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
-          <Xbutton show={this.state.show}  onClick={() => this.handleClick()}>x</Xbutton>
+          <Input type="text" id="search" name="body" value={value} placeholder="Have a question? Search for answers" maxLength="150" size="110" onChange={this.handleChange} />
+          <Xbutton show={show} onClick={() => this.handleClick()}>x</Xbutton>
         </SearchWrapper>
       </StyledForm>
     );
   }
-}
+};
+
+searchForm.propTypes = {
+  value: PropTypes.string,
+  search: PropTypes.func,
+};
 
 export default searchForm;
